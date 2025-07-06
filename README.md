@@ -38,7 +38,7 @@
 
 local FarmTab = Window:CreateTab("Farm", 4483362458) -- Title, Image
 local PvPTab = Window:CreateTab("PvP", 4483362458) -- Title, Image
-local ToolTab = Window:CreateTab("Free Tool", 4483362458) -- Title, Image
+local FreeTab = Window:CreateTab("Free Tool", 4483362458) -- Title, Image
 
 local Toggle = FarmTab:CreateToggle({
 	Name = "Farming Grind 5k/Spawn",
@@ -192,4 +192,132 @@ local Toggle = FarmTab:CreateToggle({
 			wait()
 		end
 	end,
+})
+
+local isHitting = false
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local player = players.LocalPlayer
+
+-- Fonction pour obtenir le joueur le plus proche
+local function getClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge  -- Une valeur initiale infinie
+
+    -- Parcours de tous les joueurs
+    for _, targetPlayer in pairs(players:GetPlayers()) do
+        if targetPlayer ~= player and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local targetPosition = targetPlayer.Character.HumanoidRootPart.Position
+            local playerPosition = player.Character.HumanoidRootPart.Position
+            local distance = (targetPosition - playerPosition).Magnitude  -- Calcul de la distance
+
+            -- Si cette distance est plus courte que la précédente, on met à jour
+            if distance < shortestDistance then
+                closestPlayer = targetPlayer
+                shortestDistance = distance
+            end
+        end
+    end
+
+    return closestPlayer
+end
+
+local function startKillAura()
+    isHitting = true
+    while isHitting do
+        local closestPlayer = getClosestPlayer()  -- Récupère le joueur le plus proche
+        if closestPlayer and closestPlayer.Character and closestPlayer.Character:FindFirstChild("Humanoid") then
+            local args = {
+                [1] = closestPlayer.Character.Humanoid,
+                [2] = 1  -- Valeur à envoyer au serveur, peut être ajustée si nécessaire
+            }
+            -- Appelez la fonction sur le serveur
+            replicatedStorage.jdskhfsIIIllliiIIIdchgdIiIIIlIlIli:FireServer(unpack(args))  -- Vérifiez ce nom
+        end
+        task.wait()  -- Ajoutez une petite attente pour éviter de trop solliciter le serveur
+    end
+end
+
+local function stopKillAura()
+    isHitting = false
+end
+
+-- Création du Toggle pour activer/désactiver le kill aura
+local Toggle = PvPTab:CreateToggle({
+    Name = "kill aura",
+    CurrentValue = false,
+    Flag = "Toggle1", 
+    Callback = function(Value)
+        if Value then
+            task.spawn(startKillAura)
+        else
+            stopKillAura()
+        end
+    end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "S7",
+   Callback = function()
+    local args = {
+    "S7"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "S8",
+   Callback = function()
+    local args = {
+    "S8"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "SSSS1",
+   Callback = function()
+    local args = {
+    "SSSS1"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "SSSS2",
+   Callback = function()
+    local args = {
+    "SSSS2"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "SSSSSS2",
+   Callback = function()
+    local args = {
+    "SSSSSSS2"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
+})
+
+local Button = FreeTab:CreateButton({
+   Name = "SSSSSSS4",
+   Callback = function()
+    local args = {
+    "SSSSSSS4"
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(args))
+   -- The function that takes place when the button is pressed
+   end,
 })
