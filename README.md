@@ -35,7 +35,6 @@
 			Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
 		}
 	})
-end)
 
 local FarmTab = Window:CreateTab("Farm", 4483362458) -- Title, Image
 local PvPTab = Window:CreateTab("PvP", 4483362458) -- Title, Image
