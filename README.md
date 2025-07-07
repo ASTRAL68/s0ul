@@ -38,7 +38,6 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local FarmTab = Window:CreateTab("Farm", 4483362458) -- Title, Image
 local PvPTab = Window:CreateTab("PvP", 4483362458) -- Title, Image
-local FreeTab = Window:CreateTab("Free Tool", 4483362458) -- Title, Image
 
 local Toggle = FarmTab:CreateToggle({
 	Name = "Farming Grind 5k/Spawn",
@@ -256,6 +255,7 @@ local Toggle = PvPTab:CreateToggle({
     end,
 })
 
+local FreeTab = Window:CreateTab("Free Tool", 4483362458) -- Title, Image
 
 local optionArgs = {
     S7 = {"S7"},
@@ -268,7 +268,7 @@ local optionArgs = {
 
 local currentArgs = {"S7"}
 
-local Dropdown = ToolTab:CreateDropdown({
+local Dropdown = FreeTab:CreateDropdown({
     Name = "Dropdown Example",
     Options = {"S7", "S8", "SSSS1", "SSSS2", "SSSSSS2", "SSSSSSS4"},
     CurrentOption = "S7",
@@ -279,11 +279,8 @@ local Dropdown = ToolTab:CreateDropdown({
     end,
 })
 
-local Button = ToolTab:CreateButton({
+local Button = FreeTab:CreateButton({
     Name = "Button Example",
     Callback = function()        game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("WeaponEvent"):FireServer(unpack(currentArgs))
     end,
-})
-   -- The function that takes place when the button is pressed
-   end,
 })
